@@ -1,0 +1,11 @@
+{
+    "name": "fattest",
+    "version": "0.1.0",
+    "author": "Jordon Biondo <biondoj@mail.gvsu.edu>",
+    "main": "fattest.js",
+    "keywords": [
+        "testing",
+        "unit test"
+    ],
+    "repository": "git://github.com/jordonbiondo/fattest.git"
+}
