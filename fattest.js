@@ -1,5 +1,5 @@
 /* fattest.js --- tiny little testing tool
- * 
+ *
  * Filename: fattest.js
  * Description: tiny little testing tool
  * Author: Jordon Biondo jordonbiondo@gmail.com
@@ -10,22 +10,22 @@
  * URL: github.com/jordonbiondo/fattest
  */
 
-/* Commentary: 
- * 
- * 
- * 
+/* Commentary:
+ *
+ *
+ *
  */
 
 /* This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
  * published by the Free Software Foundation; either version 3, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; see the file COPYING.  If not, write to
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth
@@ -57,7 +57,7 @@ var Test = function(func, args, expected, context) {
   this.expected = expected;
   this.passed = null;
 
-  
+
   /**
    * The derived name of the test
    */
@@ -66,7 +66,7 @@ var Test = function(func, args, expected, context) {
     var name = ((this.context) ? this.context.constructor.name + "." : "") + this.func.name;
     return (name != "") ? name : "λ";
   };
-  
+
 
   /**
    * Run this test, display results, set this.passed
@@ -92,10 +92,10 @@ var Test = function(func, args, expected, context) {
 	this.passed = false;
 	string += " | CAUGHT: " + err;
       }
-    } 
+    }
     console.log(" " + (this.passed ? fatGreen("*") : fatRed("-")) + "  " + string);
   };
-  
+
 };
 
 
@@ -145,7 +145,7 @@ var TestEnv = function() {
     this.tests.forEach(function(test) {
       test.run();
     });
-    
+
     var passes = (this.tests.filter(function(test) { return test.passed == true; })).length;
     var fails = this.tests.length - passes;
 
