@@ -42,8 +42,9 @@
 /**
  * String Colors
  */
-String.prototype.fatGreen = function() {return "\x1b[32m" + this + "\x1b[0m";};
-String.prototype.fatRed = function() {return "\x1b[31m" + this + "\x1b[0m";};
+
+var fatGreen = function(str) {return "\x1b[32m" + str + "\x1b[0m";};
+var fatRed = function(str) {return "\x1b[31m" + str + "\x1b[0m";};
 
 
 /**
@@ -85,7 +86,7 @@ var Test = function(func, args, expected) {
 	string += " | CAUGHT: " + err;
       }
     } 
-    console.log(" " + (this.passed ? "✓".fatGreen() : "✗".fatRed()) + "  " + string);
+    console.log(" " + (this.passed ? fatGreen("*") : fatRed("-")) + "  " + string);
   };
   
 };
@@ -121,8 +122,12 @@ var TestEnv = function() {
     var fails = this.tests.length - passes;
 
     console.log("\n" + this.tests.length + " tests run ");
-    console.log("\tPassed: ".fatGreen() + ((passes == this.tests.length) ? "All" : passes));
-    if (fails > 0) console.log("\tFailed: ".fatRed() + fails);
+    console.log(fatGreen("\tPassed: ") + ((passes == this.tests.length) ? "All" : passes));
+    if (fails > 0) console.log(fatRed("\tFailed: ") + fails);
+    return {
+      passes: passes,
+      fails: fails
+    };
   };
 
 };
