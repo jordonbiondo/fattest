@@ -73,10 +73,12 @@ var Test = function(func, args, target, context) {
    */
   this.run = function() {
     var target_name = (typeof this.target === "function") ? 'predicate()' : this.target;
-    var string = this.name()+"("+this.args.join()+") == " + target_name;
+    var string = this.name()+"("+this.args.join()+") == "; 
     try {
       // run the test
       var output = this.func.apply(this.context, this.args);
+      string += target_name;
+      
       // check output against value or predicate
       this.passed = (typeof this.target === 'function')
 	? (this.target(output) === true)
@@ -88,7 +90,9 @@ var Test = function(func, args, target, context) {
     } catch (err) {
       if (typeof target === "function" && err.name === target.name) {
 	this.passed = true;
+	string += err.name;
       } else {
+	string += target_name;
 	this.passed = false;
 	string += " | CAUGHT: " + err;
       }
