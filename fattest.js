@@ -50,11 +50,11 @@ var fatRed = function(str) {return "\x1b[31m" + str + "\x1b[0m";};
 /**
  * A single test
  */
-var Test = function(func, args, expected, context) {
+var Test = function(func, args, target, context) {
   this.context = (context) ? context : null;
   this.func = (context && typeof func === 'string') ? context[func] : func;
   this.args = args;
-  this.expected = expected;
+  this.target = target;
   this.passed = null;
 
 
@@ -72,21 +72,21 @@ var Test = function(func, args, expected, context) {
    * Run this test, display results, set this.passed
    */
   this.run = function() {
-    var expected_name = (typeof this.expected === "function") ? 'predicate()' : this.expected;
-    var string = this.name()+"("+this.args.join()+") == " + expected_name;
+    var target_name = (typeof this.target === "function") ? 'predicate()' : this.target;
+    var string = this.name()+"("+this.args.join()+") == " + target_name;
     try {
       // run the test
       var output = this.func.apply(this.context, this.args);
       // check output against value or predicate
-      this.passed = (typeof this.expected === 'function')
-	? (this.expected(output) === true)
-	: this.expected === output;
+      this.passed = (typeof this.target === 'function')
+	? (this.target(output) === true)
+	: this.target === output;
 
       if (! this.passed) {
 	string += " | GOT: " + output;
       }
     } catch (err) {
-      if (typeof expected === "function" && err.name === expected.name) {
+      if (typeof target === "function" && err.name === target.name) {
 	this.passed = true;
       } else {
 	this.passed = false;
@@ -110,10 +110,10 @@ var TestEnv = function() {
   this.tests = [];
 
   /**
-   * Define a new test, run FUNC with ARGS and assert the output == EXPECTED when run
+   * Define a new test, run FUNC with ARGS and assert the output == TARGET when run
    */
-  this.def = function(func, args, expected, context) {
-    this.tests.push(new Test(func, args, expected, context));
+  this.def = function(func, args, target, context) {
+    this.tests.push(new Test(func, args, target, context));
   };
 
   /**
@@ -123,14 +123,14 @@ var TestEnv = function() {
     Array.prototype.slice.call(arguments, 1).forEach(function(testObj) {
       var func = testObj["func"];
       var args = testObj["args"];
-      var expected = testObj["expected"];
-      if (func !== null && args !== null && expected !== null) {
-	this.def(func, args, expected, context);
+      var target = testObj["target"];
+      if (func !== null && args !== null && target !== null) {
+	this.def(func, args, target, context);
       } else {
 	console.log(fatRed("Invalid test definition"),
 		    context + "." + (func) ? func.name : null +
 		    "(" + ((args) ? (args.join) ? (args.join()) : null : null) + ")" +
-		    " === " + expected);
+		    " === " + target);
 
 
       }
