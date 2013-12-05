@@ -3,6 +3,9 @@
     "version": "0.1.0",
     "author": "Jordon Biondo <biondoj@mail.gvsu.edu>",
     "main": "fattest.js",
+    "license" : {
+	"license": "GPL"
+    },
     "keywords": [
         "testing",
         "unit test"
