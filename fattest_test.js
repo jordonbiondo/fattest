@@ -81,13 +81,12 @@ tests.def(multiply, ['foo', 'bar'], isNaN);
 
 // function that will throw an error when given a 0 arg
 function throwAnErrorWhenZero(n) {
-  if (n === 0) throw TypeError;
+  if (n === 0) throw new TypeError();
   else return "hello";
 }
 
 // we can test that we get errors when expected
 tests.def(throwAnErrorWhenZero, [0], TypeError);
-
 
 
 /**
