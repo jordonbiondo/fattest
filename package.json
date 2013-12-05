@@ -1,6 +1,6 @@
 {
     "name": "fattest",
-    "version": "0.1.0",
+    "version": "0.2.1",
     "author": "Jordon Biondo <biondoj@mail.gvsu.edu>",
     "main": "fattest.js",
     "license" : {
