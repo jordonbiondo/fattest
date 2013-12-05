@@ -140,3 +140,5 @@ module.exports = {
   Test: Test,
   Env: TestEnv // short name
 };
+
+/* fattest.js ends here */
